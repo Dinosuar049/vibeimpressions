@@ -1,30 +1,82 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-
-
 <head>
     <meta charset="UTF-8">
-    <title>Vibe impression</title>
-    <link rel="stylesheet" href="vibeimpressionstyle.css">
+    <title>Business Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 50px auto;
+            border: 1px solid black;
+            padding: 30px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .sidebar {
+            width: 200px;
+            margin-right: 50px;
+        }
+
+        .logo {
+            width: 140px;
+            height: 140px;
+            border: 2px solid black;
+            border-radius: 50%;
+            margin-bottom: 30px;
+        }
+
+        .nav-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid black;
+            text-align: center;
+            background: white;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .main {
+            flex: 1;
+        }
+
+        .title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .slogan {
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
-
 <body>
-    <header>Vibe Impression</header>
-    <h1>For your lasting impression</h1>
-    <h1> Make it Vibe impression</h1>
 
-        <nav>
-            <a href="Products.html">Products</a>
-            <a href="Services.html">Services</a>
-        </nav>
+<div class="container">
+    <div class="sidebar">
+        <div class="logo"></div>
+        <a href="<?php echo 'product.php'; ?>" class="nav-button">Product</a>
+        <a href="<?php echo 'services.php'; ?>" class="nav-button">Services</a>
+        <a href="<?php echo 'about.php'; ?>" class="nav-button">About us</a>
+    </div>
+    <div class="main">
+        <div class="title">TITLE</div>
+        <div class="slogan">Slogan goes here</div>
+        <p>Information about what we sell goes here.</p>
+    </div>
+</div>
 
-    <main>
-        <h2>Welcome!!!</h2>
-        <p>Text about the company goes here</p>
-    </main>
-
-    <footer>
-        <p></p>
-    </footer>
 </body>
 </html>
