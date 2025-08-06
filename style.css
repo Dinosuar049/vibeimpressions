@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 50px auto;
+    border: 1px solid black;
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    width: 200px;
+    margin-right: 50px;
+}
+
+.logo img {
+    width: 140px;
+    height: 140px;
+    border: 2px solid black;
+    border-radius: 50%;
+    margin-bottom: 30px;
+}
+
+.nav-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #800020; /* Burgundy outline */
+    border-radius: 8px;         /* Rounded corners */
+    background: black;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.main {
+    flex: 1;
+}
+
+.title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.slogan {
+    margin-bottom: 30px;
+}
+
+.content {
+    margin-top: 50px; /* Push content lower */
+}
