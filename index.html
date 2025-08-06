@@ -3,86 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Vibe Impressions</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #fff;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 50px auto;
-            border: 1px solid black;
-            padding: 30px;
-            display: flex;
-            flex-direction: row;
-        }
-
-        .sidebar {
-            width: 200px;
-            margin-right: 50px;
-        }
-
-        .logo {
-            width: 140px;
-            height: 140px;
-            border: 2px solid black;
-            border-radius: 50%;
-            margin-bottom: 30px;
-        }
-
-        .nav-button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid black;
-            text-align: center;
-            background: white;
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-
-        .main {
-            flex: 1;
-        }
-
-        .title {
-            font-size: 2em;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .slogan {
-            margin-bottom: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
     <div class="sidebar">
         <div class="logo">
-            <img src="logo.pdf" alt="logo">
+            <img src="logo.png" alt="logo">
         </div>
-        <a href="<?php echo 'product.php'; ?>" class="nav-button">Product</a>
-        <a href="<?php echo 'services.php'; ?>" class="nav-button">Services</a>
-        <a href="<?php echo 'about.php'; ?>" class="nav-button">About us</a>
+        <a href="product.php" class="nav-button">Product</a>
+        <a href="services.php" class="nav-button">Services</a>
+        <a href="about.php" class="nav-button">About us</a>
     </div>
     <div class="main">
         <div class="title">Vibe Impression</div>
-        <div class="slogan">For your lasting impression 
-            Make it vibe impression </div>
-        <p>Information about what we sell goes here.</p>
+        <div class="slogan">For your lasting impression<br>Make it Vibe Impression</div>
+
+        <div class="content">
+            <h2>Introduction</h2>
+            <p>Information about what we sell goes here.</p>
+        </div>
     </div>
 </div>
 
 </body>
 </html>
-
-
-
