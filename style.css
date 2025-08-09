@@ -20,7 +20,7 @@ body {
     margin-right: 50px;
 }
 
-img.logo {
+.logo {
     border-radius: 0 !important;
     border: none !important;
     width: 200px;
