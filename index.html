@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Vibe Impressions — Custom Badges & Merch</title>
+  <title>Vibe Impressions</title>
   <meta name="description" content="Vibe Impressions — Custom badges, pins, stickers and small-batch event merch made with care.">
   <style>
     /* ---------------------------
@@ -81,7 +81,7 @@
           <img src="logo.png" alt="Vibe Impressions logo" class="logo" id="logo">
           <div>
             <div style="font-weight:800">Vibe Impressions</div>
-            <div class="muted" style="font-size:13px">Custom badges • Merch • Event gear</div>
+            <div class="muted" style="font-size:13px">Lazer Printing</div>
           </div>
         </div>
 
@@ -96,7 +96,6 @@
     </header>
 
     <main id="main">
-      <!-- content injected by JS router -->
     </main>
 
     <footer>
@@ -136,8 +135,8 @@
       main.innerHTML = `
         <section class="hero">
           <div>
-            <h1>Make your uniforms & merch actually cool.</h1>
-            <p class="lead">Small-batch, custom badges, stickers and merch for schools, events and creators. Fast quotes, helpful design input, local NZ shipping.</p>
+            <h1>Vibe Impression</h1>
+            <p class="lead">For your lasting impression. Make it Vibe impression. </p>
             <p><a class="btn" href="#/products">See products</a></p>
 
             <div class="card" style="margin-top:18px">
@@ -151,16 +150,6 @@
             </div>
           </div>
 
-          <aside>
-            <div class="card">
-              <h4 style="margin-top:0">Why choose us</h4>
-              <ul class="muted">
-                <li>Personal service & design help</li>
-                <li>Small runs & fast turnarounds</li>
-                <li>Sustainable packaging options</li>
-              </ul>
-            </div>
-          </aside>
         </section>
 
         <section style="margin-top:18px">
@@ -205,7 +194,7 @@
       main.innerHTML = `
         <section>
           <h1>Products</h1>
-          <p class="muted">Browse some of our standard offerings — custom options available.</p>
+          <p class="muted">Something ig???.</p>
 
           <div style="margin-top:12px" class="grid">
             ${PRODUCTS.map(p=>`
@@ -216,7 +205,7 @@
                 <div style="margin-top:10px" class="row">
                   <strong>${p.price}</strong>
                   <div class="space"></div>
-                  <a href="#" class="btn" data-id="${p.id}">Enquire</a>
+                  <a href="#" class="btn" data-id="${p.id}">Buy Now</a>
                 </div>
               </article>
             `).join('')}
@@ -235,14 +224,14 @@
         <section>
           <h1>Services</h1>
           <div class="card">
-            <h3>Design help</h3>
-            <p class="muted">We offer basic design tweaks for free and full custom artwork services for larger orders.</p>
+            <h3>service 1</h3>
+            <p class="muted">Information about service 1</p>
 
-            <h3 style="margin-top:12px">Rush production</h3>
-            <p class="muted">Need things quickly? Ask about our rush options — pricing varies with timing and quantity.</p>
+            <h3 style="margin-top:12px">service 2</h3>
+            <p class="muted">information about service two</p>
 
-            <h3 style="margin-top:12px">Bulk pricing & schools</h3>
-            <p class="muted">We work directly with schools and clubs to provide clear bulk pricing and easy re-orders each year.</p>
+            <h3 style="margin-top:12px">service 3</h3>
+            <p class="muted">information about service 3</p>
           </div>
         </section>
       `;
@@ -255,15 +244,10 @@
           <h1>About Vibe Impressions</h1>
           <div class="card">
             <h3>Our story</h3>
-            <p>Founded as a school market stall, we've grown into a small local business focused on fun, wearable merch. We believe in simple, durable designs and supporting local events.</p>
+            <p>About us information goes here</p>
 
-            <h3 style="margin-top:12px">Values</h3>
-            <p class="muted">Sustainability • Community • Craft</p>
-          </div>
-
-          <div class="card" style="margin-top:12px">
-            <h3>Team</h3>
-            <p class="muted">A small team of designers and makers who take pride in personalising every order.</p>
+            <h3 style="margin-top:12px">People</h3>
+            <p class="muted">Biana • Glenn</p>
           </div>
         </section>
       `;
@@ -342,3 +326,4 @@
   </script>
 </body>
 </html>
+
