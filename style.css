@@ -21,8 +21,10 @@ body {
 }
 
 img.logo {
-  border-radius: 0 !important;
-  border: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+    width: 200px;
+    height: 200px;
 }
 
 .nav-button {
