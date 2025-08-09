@@ -1,31 +1,344 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Vibe Impressions</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vibe Impressions — Custom Badges & Merch</title>
+  <meta name="description" content="Vibe Impressions — Custom badges, pins, stickers and small-batch event merch made with care.">
+  <style>
+    /* ---------------------------
+       Vibe Impressions — Single-file SPA
+       - Use this single HTML file as your whole site. It responds to hash routes:
+         #/home  #/products  #/services  #/about  #/contact
+       - Replace logo.png with your real logo file in the same folder.
+       - This file is intentionally self-contained for ease of upload to GitHub Pages / Project Space.
+       --------------------------- */
+
+    :root{
+      --bg: #fff;
+      --card: #fafafa;
+      --muted: #6b7280;
+      --accent: #0b6cf6;
+      --radius: 12px;
+      --container: 1120px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: light;
+    }
+    *{box-sizing:border-box}
+    html,body,#app{height:100%}
+    body{margin:0;background:var(--bg);color:#111;line-height:1.5}
+
+    /* Top nav */
+    header{position:sticky;top:0;background:rgba(255,255,255,0.98);backdrop-filter:saturate(120%) blur(4px);z-index:40;border-bottom:1px solid #eee}
+    .wrap{max-width:var(--container);margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    img.logo{width:56px;height:56px;object-fit:contain;border-radius:0;border:none;background:transparent;display:block}
+    nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-weight:700}
+    .nav-active{color:var(--accent)}
+
+    /* Layout */
+    main{max-width:var(--container);margin:28px auto;padding:0 20px;min-height:calc(100vh - 140px)}
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
+    .hero h1{font-size:clamp(28px,4vw,44px);margin:0}
+    .lead{color:var(--muted);margin-top:8px}
+
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 6px 24px rgba(12,20,30,0.04)}
+
+    /* Products grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .product{padding:16px;border-radius:12px;background:white;border:1px solid #f0f0f0}
+    .product img{width:100%;height:160px;object-fit:cover;border-radius:10px}
+    .product h4{margin:10px 0 4px}
+    .product p{margin:0;color:var(--muted);font-size:14px}
+    .btn{display:inline-block;padding:8px 12px;border-radius:10px;background:var(--accent);color:white;text-decoration:none;font-weight:700}
+
+    aside{padding:12px}
+
+    footer{padding:24px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid #eee}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      img.logo{width:48px;height:48px}
+    }
+
+    /* Modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);z-index:60}
+    .modal.open{display:flex}
+    .modal .panel{width:min(720px,96%);background:white;padding:18px;border-radius:12px}
+
+    /* Utility helpers */
+    .muted{color:var(--muted)}
+    .row{display:flex;gap:12px;align-items:center}
+    .space{flex:1}
+  </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="sidebar">
-        <div class="logo">
-            <img src="logo.png" alt="logo">
+  <div id="app">
+    <header>
+      <div class="wrap">
+        <div class="brand">
+          <img src="logo.png" alt="Vibe Impressions logo" class="logo" id="logo">
+          <div>
+            <div style="font-weight:800">Vibe Impressions</div>
+            <div class="muted" style="font-size:13px">Custom badges • Merch • Event gear</div>
+          </div>
         </div>
-        <a href="product.php" class="nav-button">Product</a>
-        <a href="services.php" class="nav-button">Services</a>
-        <a href="about.php" class="nav-button">About us</a>
-    </div>
-    <div class="main">
-        <div class="title">Vibe Impression</div>
-        <div class="slogan">For your lasting impression<br>Make it Vibe Impression</div>
 
-        <div class="content">
-            <h2>Introduction</h2>
-            <p>Information about what we sell goes here.</p>
+        <nav id="nav">
+          <a href="#/home" data-route="home">Home</a>
+          <a href="#/products" data-route="products">Products</a>
+          <a href="#/services" data-route="services">Services</a>
+          <a href="#/about" data-route="about">About</a>
+          <a href="#/contact" data-route="contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- content injected by JS router -->
+    </main>
+
+    <footer>
+      © Vibe Impressions — Made with care
+    </footer>
+
+    <!-- Product modal -->
+    <div class="modal" id="modal">
+      <div class="panel" id="modalPanel"></div>
+    </div>
+  </div>
+
+  <script>
+    // ---------------------------
+    // Single-file SPA router + content
+    // ---------------------------
+
+    const main = document.getElementById('main');
+    const navLinks = document.querySelectorAll('nav a');
+    const modal = document.getElementById('modal');
+    const modalPanel = document.getElementById('modalPanel');
+
+    // Example product data — replace with your real items
+    const PRODUCTS = [
+      {id:1,title:'Custom Blazer Badges',desc:'Personalised enamel-style badges for school blazers or events.',price:'From $3.50 ea',img:'https://picsum.photos/seed/badge1/600/400'},
+      {id:2,title:'Event Stickers (500 pack)',desc:'Waterproof, high-quality stickers for promotions and merch.',price:'From $45 per 500',img:'https://picsum.photos/seed/sticker1/600/400'},
+      {id:3,title:'Printed Lanyards',desc:'Durable lanyards with full-colour print, quick turnaround.',price:'From $2.80 ea',img:'https://picsum.photos/seed/lanyard/600/400'},
+      {id:4,title:'Custom T-Shirts',desc:'Small-batch printed tees for teams and clubs.',price:'From $18 ea',img:'https://picsum.photos/seed/tee/600/400'}
+    ];
+
+    function setActive(route){
+      navLinks.forEach(a=>a.classList.toggle('nav-active', a.dataset.route===route));
+    }
+
+    function homePage(){
+      setActive('home');
+      main.innerHTML = `
+        <section class="hero">
+          <div>
+            <h1>Make your uniforms & merch actually cool.</h1>
+            <p class="lead">Small-batch, custom badges, stickers and merch for schools, events and creators. Fast quotes, helpful design input, local NZ shipping.</p>
+            <p><a class="btn" href="#/products">See products</a></p>
+
+            <div class="card" style="margin-top:18px">
+              <h3 style="margin:0 0 8px">Quick quote</h3>
+              <form id="quickQuote">
+                <div style="display:grid;grid-template-columns:1fr 140px;gap:8px">
+                  <input name="item" placeholder="What would you like made? (eg: 200 badges)" required style="padding:10px;border-radius:8px;border:1px solid #e6e6e6">
+                  <button class="btn">Get quote</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <aside>
+            <div class="card">
+              <h4 style="margin-top:0">Why choose us</h4>
+              <ul class="muted">
+                <li>Personal service & design help</li>
+                <li>Small runs & fast turnarounds</li>
+                <li>Sustainable packaging options</li>
+              </ul>
+            </div>
+          </aside>
+        </section>
+
+        <section style="margin-top:18px">
+          <div class="card">
+            <h3 style="margin-top:0">Popular products</h3>
+            <div class="grid">${PRODUCTS.slice(0,4).map(p=>`
+              <div class="product">
+                <img src="${p.img}" alt="${p.title}">
+                <h4>${p.title}</h4>
+                <p class="muted">${p.desc}</p>
+                <div style="margin-top:10px" class="row">
+                  <strong>${p.price}</strong>
+                  <div class="space"></div>
+                  <a href="#" class="btn" data-id="${p.id}">View</a>
+                </div>
+              </div>
+            `).join('')}</div>
+          </div>
+        </section>
+      `;
+
+      // Quick quote submission
+      const q = document.getElementById('quickQuote');
+      q.addEventListener('submit', e=>{
+        e.preventDefault();
+        const fd = new FormData(q);
+        openModal(`<h3>Thanks — we got your quote request</h3><p>Request: ${escapeHtml(fd.get('item'))}</p><p>We will email you a quote shortly at hello@vibeimpressions.example (replace with your real email).</p>`);
+      });
+
+      // Attach view handlers
+      document.querySelectorAll('.product .btn[data-id]').forEach(btn=>{
+        btn.addEventListener('click', e=>{
+          e.preventDefault();
+          const id = Number(btn.dataset.id);
+          openProduct(id);
+        });
+      });
+    }
+
+    function productsPage(){
+      setActive('products');
+      main.innerHTML = `
+        <section>
+          <h1>Products</h1>
+          <p class="muted">Browse some of our standard offerings — custom options available.</p>
+
+          <div style="margin-top:12px" class="grid">
+            ${PRODUCTS.map(p=>`
+              <article class="product card">
+                <img src="${p.img}" alt="${p.title}">
+                <h4>${p.title}</h4>
+                <p class="muted">${p.desc}</p>
+                <div style="margin-top:10px" class="row">
+                  <strong>${p.price}</strong>
+                  <div class="space"></div>
+                  <a href="#" class="btn" data-id="${p.id}">Enquire</a>
+                </div>
+              </article>
+            `).join('')}
+          </div>
+        </section>
+      `;
+
+      document.querySelectorAll('.product .btn[data-id]').forEach(btn=>{
+        btn.addEventListener('click', e=>{e.preventDefault(); openProduct(Number(btn.dataset.id));});
+      });
+    }
+
+    function servicesPage(){
+      setActive('services');
+      main.innerHTML = `
+        <section>
+          <h1>Services</h1>
+          <div class="card">
+            <h3>Design help</h3>
+            <p class="muted">We offer basic design tweaks for free and full custom artwork services for larger orders.</p>
+
+            <h3 style="margin-top:12px">Rush production</h3>
+            <p class="muted">Need things quickly? Ask about our rush options — pricing varies with timing and quantity.</p>
+
+            <h3 style="margin-top:12px">Bulk pricing & schools</h3>
+            <p class="muted">We work directly with schools and clubs to provide clear bulk pricing and easy re-orders each year.</p>
+          </div>
+        </section>
+      `;
+    }
+
+    function aboutPage(){
+      setActive('about');
+      main.innerHTML = `
+        <section>
+          <h1>About Vibe Impressions</h1>
+          <div class="card">
+            <h3>Our story</h3>
+            <p>Founded as a school market stall, we've grown into a small local business focused on fun, wearable merch. We believe in simple, durable designs and supporting local events.</p>
+
+            <h3 style="margin-top:12px">Values</h3>
+            <p class="muted">Sustainability • Community • Craft</p>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <h3>Team</h3>
+            <p class="muted">A small team of designers and makers who take pride in personalising every order.</p>
+          </div>
+        </section>
+      `;
+    }
+
+    function contactPage(){
+      setActive('contact');
+      main.innerHTML = `
+        <section>
+          <h1>Contact</h1>
+          <div class="card">
+            <form id="contactForm">
+              <div style="display:grid;grid-template-columns:1fr;gap:8px">
+                <input name="name" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid #e6e6e6">
+                <input name="email" placeholder="Email" required style="padding:10px;border-radius:8px;border:1px solid #e6e6e6">
+                <textarea name="message" rows="5" placeholder="Tell us about your project" style="padding:10px;border-radius:8px;border:1px solid #e6e6e6"></textarea>
+                <button class="btn">Send message</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      `;
+
+      const f = document.getElementById('contactForm');
+      f.addEventListener('submit', e=>{
+        e.preventDefault();
+        const fd = new FormData(f);
+        openModal(`<h3>Thanks ${escapeHtml(fd.get('name'))}</h3><p>We received your message and will reply to ${escapeHtml(fd.get('email'))} soon.</p>`);
+      });
+    }
+
+    function openProduct(id){
+      const p = PRODUCTS.find(x=>x.id===id);
+      if(!p) return;
+      openModal(`<div style="display:grid;grid-template-columns:200px 1fr;gap:12px;align-items:start">
+        <img src="${p.img}" style="width:100%;height:160px;object-fit:cover;border-radius:8px">
+        <div>
+          <h3 style="margin:0">${p.title}</h3>
+          <p class="muted">${p.desc}</p>
+          <p style="margin-top:8px"><strong>${p.price}</strong></p>
+          <p style="margin-top:12px"><a class="btn" href="#/contact">Enquire about this product</a></p>
         </div>
-    </div>
-</div>
+      </div>`);
+    }
 
+    function openModal(html){
+      modalPanel.innerHTML = html + `<p style="text-align:right;margin-top:12px"><button id=closeModal class='btn' style='background:#444'>Close</button></p>`;
+      modal.classList.add('open');
+      document.getElementById('closeModal').addEventListener('click', closeModal);
+    }
+    function closeModal(){ modal.classList.remove('open'); }
+
+    // Basic router
+    function router(){
+      const hash = location.hash.replace('#/','') || 'home';
+      if(hash.startsWith('products')) return productsPage();
+      if(hash.startsWith('services')) return servicesPage();
+      if(hash.startsWith('about')) return aboutPage();
+      if(hash.startsWith('contact')) return contactPage();
+      return homePage();
+    }
+
+    // small helpers
+    function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    window.addEventListener('hashchange', router);
+    window.addEventListener('load', ()=>{
+      // If the browser tried to download the file previously, ensure content-type on server is text/html.
+      // For GitHub Pages or Project Space, upload this file as index.html and it will render in-browser.
+
+      // Init
+      router();
+      // Close modal when clicking outside
+      modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+    });
+  </script>
 </body>
 </html>
