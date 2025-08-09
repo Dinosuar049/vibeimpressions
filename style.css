@@ -20,12 +20,9 @@ body {
     margin-right: 50px;
 }
 
-.logo img {
-    width: 140px;
-    height: 140px;
-    border: 2px solid black;
-    border-radius: 50%;
-    margin-bottom: 30px;
+img.logo {
+  border-radius: 0 !important;
+  border: none !important;
 }
 
 .nav-button {
