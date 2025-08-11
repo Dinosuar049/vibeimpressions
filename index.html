@@ -183,7 +183,7 @@
       q.addEventListener('submit', e=>{
         e.preventDefault();
         const fd = new FormData(q);
-        openModal(`<h3>Thanks — we got your quote request</h3><p>Request: ${escapeHtml(fd.get('item'))}</p><p>We will email you a quote shortly at hello@vibeimpressions.example (replace with your real email).</p>`);
+        openModal(`<h3>Thanks — we got your quote request</h3><p>Request: ${escapeHtml(fd.get('item'))}</p><p>We will email you a quote shortly at //email goes here.</p>`);
       });
 
       // Attach view handlers
@@ -236,7 +236,7 @@
             <p class="muted">We help turn your ideas into ready-to-produce artwork.</p>
 
             <h3 style="margin-top:12px">Bulk Production</h3>
-            <p class="muted">School orders, events and small-run merchandise.</p>
+            <p class="muted">Events merchandise.</p>
           </div>
         </section>
       `;
@@ -331,3 +331,4 @@
   </script>
 </body>
 </html>
+
