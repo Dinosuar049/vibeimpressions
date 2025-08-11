@@ -15,10 +15,11 @@
        --------------------------- */
 
     :root{
-      --bg: #fff;
-      --card: #fafafa;
-      --muted: #6b7280;
-      --accent: #0b6cf6;
+      --bg: #fff8f9; /* very light warm */
+      --card: #fff6f7;
+      --muted: #6b5b63;
+      --accent: #7b1630; /* burgundy */
+      --accent-2: #9b2b44; /* lighter burgundy */
       --radius: 12px;
       --container: 1120px;
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -29,37 +30,38 @@
     body{margin:0;background:var(--bg);color:#111;line-height:1.5}
 
     /* Top nav */
-    header{position:sticky;top:0;background:rgba(255,255,255,0.98);backdrop-filter:saturate(120%) blur(4px);z-index:40;border-bottom:1px solid #eee}
+    header{position:sticky;top:0;background:rgba(255,250,250,0.96);backdrop-filter:saturate(120%) blur(4px);z-index:40;border-bottom:1px solid rgba(123,22,48,0.06)}
     .wrap{max-width:var(--container);margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    img.logo{width:56px;height:56px;object-fit:contain;border-radius:0;border:none;background:transparent;display:block}
+    .brand{display:flex;align-items:center;gap:14px}
+    /* make logo more visible */
+    img.logo{width:72px;height:72px;object-fit:contain;border-radius:4px;border:2px solid rgba(123,22,48,0.08);display:block;box-shadow:0 6px 18px rgba(123,22,48,0.08);background:linear-gradient(180deg, rgba(155,43,68,0.02), rgba(123,22,48,0.01));padding:6px}
     nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-weight:700}
     .nav-active{color:var(--accent)}
 
     /* Layout */
     main{max-width:var(--container);margin:28px auto;padding:0 20px;min-height:calc(100vh - 140px)}
     .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
-    .hero h1{font-size:clamp(28px,4vw,44px);margin:0}
+    .hero h1{font-size:clamp(28px,4vw,44px);margin:0;color:var(--accent)}
     .lead{color:var(--muted);margin-top:8px}
 
-    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 6px 24px rgba(12,20,30,0.04)}
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 6px 24px rgba(12,20,30,0.03)}
 
     /* Products grid */
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
-    .product{padding:16px;border-radius:12px;background:white;border:1px solid #f0f0f0}
+    .product{padding:16px;border-radius:12px;background:white;border:1px solid #f6e9ea}
     .product img{width:100%;height:160px;object-fit:cover;border-radius:10px}
-    .product h4{margin:10px 0 4px}
+    .product h4{margin:10px 0 4px;color:#2b0b10}
     .product p{margin:0;color:var(--muted);font-size:14px}
     .btn{display:inline-block;padding:8px 12px;border-radius:10px;background:var(--accent);color:white;text-decoration:none;font-weight:700}
 
     aside{padding:12px}
 
-    footer{padding:24px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid #eee}
+    footer{padding:24px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid rgba(123,22,48,0.04)}
 
     /* Responsive */
     @media (max-width:980px){
       .hero{grid-template-columns:1fr}
-      img.logo{width:48px;height:48px}
+      img.logo{width:56px;height:56px}
     }
 
     /* Modal */
@@ -80,8 +82,8 @@
         <div class="brand">
           <img src="logo.png" alt="Vibe Impressions logo" class="logo" id="logo">
           <div>
-            <div style="font-weight:800">Vibe Impressions</div>
-            <div class="muted" style="font-size:13px">Lazer Printing</div>
+            <div style="font-weight:800;color:var(--accent)">Vibe Impressions</div>
+            <div class="muted" style="font-size:13px">Lazer Printing & Engraving</div>
           </div>
         </div>
 
@@ -120,10 +122,15 @@
 
     // Example product data — replace with your real items
     const PRODUCTS = [
-      {id:1,title:'Custom Blazer Badges',desc:'Personalised enamel-style badges for school blazers or events.',price:'From $3.50 ea',img:'https://picsum.photos/seed/badge1/600/400'},
-      {id:2,title:'Event Stickers (500 pack)',desc:'Waterproof, high-quality stickers for promotions and merch.',price:'From $45 per 500',img:'https://picsum.photos/seed/sticker1/600/400'},
-      {id:3,title:'Printed Lanyards',desc:'Durable lanyards with full-colour print, quick turnaround.',price:'From $2.80 ea',img:'https://picsum.photos/seed/lanyard/600/400'},
-      {id:4,title:'Custom T-Shirts',desc:'Small-batch printed tees for teams and clubs.',price:'From $18 ea',img:'https://picsum.photos/seed/tee/600/400'}
+      {id:1,title:'Tree of Life — Wood Engraving',desc:'Intricate Tree of Life engraving on premium wood slice.',price:'From $45',img:'https://picsum.photos/seed/treeoflife/600/400'},
+      {id:2,title:'Woman in Tree — Engraved Art',desc:'Portrait-style wood engraving: woman entwined in branches.',price:'From $55',img:'https://picsum.photos/seed/womanintree/600/400'},
+      {id:3,title:'Home — Custom Wood Sign',desc:'Personalised wooden home signs with farmhouse vibe.',price:'From $35',img:'https://picsum.photos/seed/homewood/600/400'},
+      {id:4,title:'Spiderman — Wood Engraving (Fan Art)',desc:'Stylised Spiderman engraving — small-batch collectors item.',price:'From $40',img:'https://picsum.photos/seed/spiderman/600/400'},
+      {id:5,title:'Wolf — Wood Engraving',desc:'Detailed wolf portrait engraved on oak or maple.',price:'From $48',img:'https://picsum.photos/seed/wolf/600/400'},
+      {id:6,title:'Scorpion — Tool Engraving',desc:'Sharp scorpion motif for tools, gifts and plaques.',price:'From $30',img:'https://picsum.photos/seed/scorpian/600/400'},
+      {id:7,title:'Best Daddy Ever — Haunted House Plaque',desc:'Playful spooky themed “Best Daddy Ever” plaque for dad.',price:'From $28',img:'https://picsum.photos/seed/daddy/600/400'},
+      {id:8,title:'Flowers — Floral Engraving',desc:'Delicate floral patterns engraved on wood or leather.',price:'From $32',img:'https://picsum.photos/seed/flowers/600/400'},
+      {id:9,title:'Tool Engraving — Personalised',desc:'Initials or logos engraved onto hand tools and metal parts.',price:'From $12',img:'https://picsum.photos/seed/tools/600/400'}
     ];
 
     function setActive(route){
@@ -155,7 +162,7 @@
         <section style="margin-top:18px">
           <div class="card">
             <h3 style="margin-top:0">Popular products</h3>
-            <div class="grid">${PRODUCTS.slice(0,4).map(p=>`
+            <div class="grid">${PRODUCTS.slice(0,6).map(p=>`
               <div class="product">
                 <img src="${p.img}" alt="${p.title}">
                 <h4>${p.title}</h4>
@@ -213,9 +220,7 @@
         </section>
       `;
 
-      document.querySelectorAll('.product .btn[data-id]').forEach(btn=>{
-        btn.addEventListener('click', e=>{e.preventDefault(); openProduct(Number(btn.dataset.id));});
-      });
+      document.querySelectorAll('.product .btn[data-id]').forEach(btn=>{btn.addEventListener('click', e=>{e.preventDefault(); openProduct(Number(btn.dataset.id));});});
     }
 
     function servicesPage(){
@@ -224,14 +229,14 @@
         <section>
           <h1>Services</h1>
           <div class="card">
-            <h3>service 1</h3>
-            <p class="muted">Information about service 1</p>
+            <h3>Laser Engraving</h3>
+            <p class="muted">Wood, leather, acrylic and metal engraving services.</p>
 
-            <h3 style="margin-top:12px">service 2</h3>
-            <p class="muted">information about service two</p>
+            <h3 style="margin-top:12px">Custom Design</h3>
+            <p class="muted">We help turn your ideas into ready-to-produce artwork.</p>
 
-            <h3 style="margin-top:12px">service 3</h3>
-            <p class="muted">information about service 3</p>
+            <h3 style="margin-top:12px">Bulk Production</h3>
+            <p class="muted">School orders, events and small-run merchandise.</p>
           </div>
         </section>
       `;
@@ -326,4 +331,3 @@
   </script>
 </body>
 </html>
-
